@@ -1,0 +1,36 @@
+﻿@using EntityLayer.Entities
+@model List<Book>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2 style="text-align: center;" class="display-4">Books</h2>
+
+
+<table class="table table-hover" style="margin-top: 10px">
+    <thead>
+        <tr>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Book Type</th>
+            <th>Page</th>
+            <th>Price</th>
+            <th>Process</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Author.Name</td>
+                <td>@item.Type.Name</td>
+                <td>@item.Page</td>
+                <td>@item.Price ₺</td>
+                <td>
+                    <a href="/Home/Delete/@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

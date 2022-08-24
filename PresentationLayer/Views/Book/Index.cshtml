@@ -1,0 +1,57 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if(!String.IsNullOrEmpty(@ViewBag.AddBookSuccessMessage))
+{
+    <div class="alert alert-success" style="text-align:center">@ViewBag.AddBookSuccessMessage</div>
+}
+@if(!String.IsNullOrEmpty(@ViewBag.DigitFailedMessage))
+{
+     <div class="alert alert-danger" style="text-align:center">@ViewBag.DigitFailedMessage</div>
+}
+<body>
+    <div class="container">
+        <h2 style="text-align: center;" class="display-4">Page of Add Book</h2>
+        <div class="row" style="text-align: center; margin-top: 90px;">
+            <div class="col-3"></div>
+            <div class="col-md-6 col-md-offset-3 col-md-offset-3">
+                <form asp-controller="Book" asp-action="Index" method="post">
+                    <div class="form-group">
+                        <label for="">Book Name</label>
+                        <input type="text" class="form-control" asp-for="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Book Type</label>
+                        <select class="form-control" asp-for="BookTypeId">
+                            @foreach (BookTypeViewModel item in ViewBag.BookTypes)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Author</label>
+                        <select class="form-control" asp-for="AuthorId">
+                            @foreach (AuthorViewModel item in ViewBag.Authors)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Page</label>
+                        <input type="number" class="form-control" min="1" asp-for="Page" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Price</label>
+                        <input type="number" class="form-control" min="1" asp-for="Price" required>
+                    </div>
+                    <input type="submit" style="margin-top: 10px;" class="btn btn-outline-primary" value="Save">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
